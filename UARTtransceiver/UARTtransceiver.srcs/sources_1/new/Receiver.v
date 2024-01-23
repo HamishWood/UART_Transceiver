@@ -31,7 +31,8 @@ module Receiver(
     parameter S_idle = 2'b00,
               S_waiting = 2'b01,
               S_listening = 2'b10;
-              
+    
+    //ClkPerBit = clk/baud.          
     parameter ClkPerBit = 100000000/57600;
     reg [31:0] ClkCounter = 0;
     reg [3:0] BitCounter = 0;

@@ -32,7 +32,7 @@ module Transmitter(
               S_load = 2'b10,
               S_sending = 2'b11;
     
-    //ClkPerBit = clk/baud, ClkPerBit above the baud rate may cause repetition.
+    //ClkPerBit = clk/baud.
     parameter ClkPerBit = 100000000/57600;
     reg [31:0] ClkCounter = 0;
     

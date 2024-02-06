@@ -29,7 +29,8 @@ module Transceiver(
     output UART_RXD_OUT,
     input UART_TXD_IN,
     output reg [7:0] ReceiverTest = 0, //Demonstration mode output, can be commented out along with line 192.
-    input ReceiverOn
+    input ReceiverOn,  //Drive high to run the UART receiver, switch off to reset.
+    output reg ReceiverFull = 0 //flag which is driven high once the receivermessage register is full.
     );
     
     //Demonstration mode registers.
@@ -140,15 +141,21 @@ module Transceiver(
                 if (ReceiverOn & RPacketCounter != Format) begin
                     ReceiverState = SR_waiting;
                     RecToggle = 1;
+                end else if (RPacketCounter == Format) begin
+                    ReceiverFull = 1;
                 end
                 if (!ReceiverOn) begin
                     RPacketCounter = 0; //configurable.
                     RecToggle = 0;
+                    ReceiverFull = 0;
                 end
             end
             SR_waiting: begin
                 if (RecGood) begin
                     ReceiverState = SR_bundle;
+                end
+                if (!ReceiverOn) begin
+                    ReceiverState = SR_idle;
                 end
             end
             SR_bundle: begin

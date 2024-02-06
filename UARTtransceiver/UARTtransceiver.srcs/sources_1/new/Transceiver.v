@@ -28,7 +28,7 @@ module Transceiver(
     output reg TransmitDone = 1,
     output UART_RXD_OUT,
     input UART_TXD_IN,
-    output reg [7:0] ReceiverTest = 0, //Demonstration mode output, can be commented out along with line 192.
+    output reg [7:0] ReceiverTest = 0, //Demonstration mode output, can be commented out along with line 197.
     input ReceiverOn,  //Drive high to run the UART receiver, switch off to reset.
     output reg ReceiverFull = 0 //flag which is driven high once the receivermessage register is full.
     );
@@ -50,8 +50,8 @@ module Transceiver(
     parameter Format = 32;
     reg [31:0] TclkDelay = 0;
     
-    // Modify with equation counter = 32 - (Bytes needed) along with lines 128,147 then comment out 
-    // out of range cases for lines 84-115 and 158-189.
+    // Modify with equation counter = 32 - (Bytes needed) along with lines 127,148 then comment out 
+    // out of range cases for lines 82-115 and 162-195.
     reg [7:0] TPacketCounter = 0;
     reg [7:0] RPacketCounter = 0;
     

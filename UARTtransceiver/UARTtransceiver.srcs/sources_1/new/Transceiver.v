@@ -126,7 +126,7 @@ module Transceiver(
                             TransmitDone = 1;
                             TPacketCounter = 0; //configurable.
                         end
-                    end else if (TclkDelay == 1000000) begin  //Prevent packets from being transmitted too quickly.
+                    end else if (TclkDelay == 100000) begin  //Prevent packets from being transmitted too quickly. The minimum possible value for this delay is clk*(10/baud)
                         TransState = ST_load;
                         TclkDelay = 0;
                     end else begin
